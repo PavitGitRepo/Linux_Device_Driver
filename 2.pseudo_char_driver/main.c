@@ -12,7 +12,41 @@ dev_t dev_num;
 
 struct cdev pcd_cdev;
 
-struct file_operations pcd_fops;
+
+loff_t pcd_lseek(struct file *filep, loff_t off, int whence)
+{
+	return 0;
+}
+
+ssize_t pcd_read(struct file *filep, char __user *buff, size_t count, loff_t *f_pos)
+{
+	return 0;
+}
+
+ssize_t pcd_write(struct file *filep, const char __user *buff, size_t count, loff_t *f_pos)
+{
+	return 0;
+}
+
+int pcd_open(struct inode *inode, struct file *filep)
+{
+	return 0;
+}
+
+int pcd_release(struct inode *inode, struct file *filep)
+{
+	return 0;
+}
+
+struct file_operations pcd_fops = {
+	.open = pcd_open,
+	.write = pcd_write,
+	.read = pcd_read,
+	.llseek = pcd_lseek,
+	.release = pcd_release,
+	.owner = THIS_MODULE
+};
+
 
 static int __init pcd_driver_init(void)
 {
